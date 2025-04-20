@@ -9,7 +9,12 @@ const app = express();
 const PORT = process.env.PORT;
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://finance-tracker-7ose.onrender.com",
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // JWT Secret - Move to .env in production!
