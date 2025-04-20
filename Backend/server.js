@@ -20,11 +20,7 @@ app.use(express.json());
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  connectionString: process.env.DATABASE_URL, // Directly use the full URL from the .env
   ssl: {
     rejectUnauthorized: false, // Ensure SSL connection for secure communication (required on Render)
   },
