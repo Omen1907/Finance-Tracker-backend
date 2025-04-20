@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // Middleware
 app.use(cors());
@@ -19,11 +19,11 @@ app.use(cors());
 app.use(express.json()); // bodyParser.json() is redundant with this
 
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "Finance and user dashboard",
-  password: "Quantum_190703",
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
 
 // Test DB connection
@@ -48,7 +48,7 @@ const authenticateToken = (req, res, next) => {
 
   try {
     // Verify token using JWT_SECRET (matches your earlier code)
-    const decoded = jwt.verify(token, "your_secret_key"); // Move to .env in production!
+    const decoded = jwt.verify(token, JWT_SECRET); // Move to .env in production!
     req.user = decoded; // Attach decoded payload (includes userId) to req
     next(); // Proceed to the route handler
   } catch (err) {
