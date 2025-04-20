@@ -18,23 +18,6 @@ const JWT_SECRET = process.env.JWT_SECRET;
 app.use(cors());
 app.use(express.json()); // bodyParser.json() is redundant with this
 
-// function checkAdmin(req, res, next) {
-//   if (req.user && req.user.role === "admin") {
-//     return next();
-//   }
-//   return res.status(403).json({ message: "Access denied: Admins only" });
-// }
-
-// app.get("/admin/data", checkAdmin, async (req, res) => {
-//   try {
-//     const result = await pool.query("SELECT * FROM users");
-//     res.json(result.rows);
-//   } catch (err) {
-//     console.error("Error fetching data:", err);
-//     res.status(500).json({ error: "Internal Server Error" });
-//   }
-// });
-
 const pool = new Pool({
   user: "postgres",
   host: "localhost",
@@ -277,5 +260,3 @@ app.delete("/transactions/:id", authenticateToken, async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
-// Integrate the admin routes (/admin/users, etc.).
