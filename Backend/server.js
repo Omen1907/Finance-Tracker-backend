@@ -12,7 +12,6 @@ const PORT = process.env.PORT;
 app.use(
   cors({
     origin: "https://finance-tracker-7ose.onrender.com",
-    credentials: true,
   })
 );
 app.use(express.json());
