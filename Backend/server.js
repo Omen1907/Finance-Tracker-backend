@@ -15,9 +15,6 @@ app.use(express.json());
 // JWT Secret - Move to .env in production!
 const JWT_SECRET = process.env.JWT_SECRET;
 
-app.use(cors());
-app.use(express.json()); // bodyParser.json() is redundant with this
-
 const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
