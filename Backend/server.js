@@ -94,8 +94,12 @@ app.post("/register", async (req, res) => {
       user: { email: result.rows[0].email },
     });
   } catch (err) {
-    console.error("Database error:", err);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("Register error:", {
+      message: err.message,
+      stack: err.stack,
+      requestBody: req.body,
+    });
+    res.status(500).json({ error: `Internal server error: ${err.message}` });
   }
 });
 
@@ -134,8 +138,12 @@ app.post("/signin", async (req, res) => {
       user: { id: user.id, email: user.email },
     });
   } catch (err) {
-    console.error("Login error:", err);
-    res.status(500).json({ error: "Server error" });
+    console.error("Signin error:", {
+      message: err.message,
+      stack: err.stack,
+      requestBody: req.body,
+    });
+    res.status(500).json({ error: `Server error: ${err.message}` });
   }
 });
 
