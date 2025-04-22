@@ -59,10 +59,17 @@ const authenticateToken = (req, res, next) => {
   }
 };
 
+app.get("/debug-db", async (req, res) => {
+  const result = await pool.query("SELECT * FROM users");
+  res.json(result.rows);
+});
+
 // Register Route
 app.post("/register", async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    console.log("Incoming registration:", req.body); // debug log
 
     // Input validation
     if (!email || email.trim() === "" || !password) {
